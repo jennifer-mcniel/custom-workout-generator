@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from markupsafe import escape
-from groqService import getLLMMessage
+from controller import generate_workout
 
 app = Flask(__name__)
 
@@ -8,14 +8,13 @@ app = Flask(__name__)
 def index():
     return render_template('home.html')
 
-@app.route("/workout")
-def hello_world():
-    return render_template("workout-form.html")
+@app.route('/api/generate-workout', methods=['POST'])
+def workout_controller():
+    return generate_workout(request)
 
 @app.route('/success/<name>')
 def success(name):
-    return getLLMMessage()
-    # return 'Welcome %s' % name
+    return 'Welcome %s' % name
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

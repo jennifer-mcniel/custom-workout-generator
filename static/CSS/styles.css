@@ -106,6 +106,10 @@ nav ul li a {
     color: #203b4c; /* Dark teal */
 }
 
+.step-row {
+    padding-left: 10px;
+}
+
 /* Footer */
 footer {
     background-color: #203b4c; /* Dark teal */

@@ -7,7 +7,7 @@ client = Groq(
     api_key=api_key,
 )
 
-def getLLMMessage():
+def getTestLLMMessage():
     chat_completion = client.chat.completions.create(
         messages=[
             {
