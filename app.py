@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from markupsafe import escape
+from groqService import getLLMMessage
 
 app = Flask(__name__)
 
@@ -13,7 +14,8 @@ def hello_world():
 
 @app.route('/success/<name>')
 def success(name):
-    return 'Welcome %s' % name
+    return getLLMMessage()
+    # return 'Welcome %s' % name
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
