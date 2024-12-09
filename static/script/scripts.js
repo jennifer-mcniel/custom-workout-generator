@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("workoutForm");
     const workoutTableBody = document.getElementById("dash-apps-list");
+    const workoutDescription = document.getElementById("workout-description"); // Element to display workout description
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent the default form submission
@@ -27,18 +28,43 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify(formObject)
             });
 
+            // console.log(JSON.stringify(formObject));
+
             if (!response.ok) {
                 throw new Error("Failed to fetch workout data");
             }
 
             // Parse the API response
-            const workoutData = await response.json();
+            const data = await response.json();
+            
+            // console.log("API Response:", data);
+
+            if (!data.WorkoutPlanDescription || !data.WorkoutJson) {
+                console.error("Invalid API response:", data);
+                alert("Received incomplete data from the server.");
+                return;
+            }
+
+            const WorkoutPlanDescription = data.WorkoutPlanDescription;
+            const WorkoutJson = data.WorkoutJson;
+
+            // console.log("WorkoutPlanDescription: ", WorkoutPlanDescription);
+            // console.log("WorkoutJson: ", WorkoutJson);
+
+            if (!Array.isArray(WorkoutJson)) {
+                console.error("WorkoutJson is not an array:", WorkoutJson);
+                alert("Invalid workout data received from the server.");
+                return;
+            }
+            
+            // Update workout description
+            workoutDescription.textContent = WorkoutPlanDescription;
 
             // Clear previous table data
             workoutTableBody.innerHTML = "";
 
             // Add the workout data to the table
-            workoutData.forEach((workout) => {
+            WorkoutJson.forEach((workout) => {
                 const { name, sets, reps, instructions, images } = workout;
 
                 // Create a row for the workout details
@@ -53,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Add instructions and images
                 let stepsRows = '';
                 instructions.forEach((step, index) => {
-                    stepsRows += `<div class="row step-row">${index + 1}. ${step}</div>`
-                });    
+                    stepsRows += `<div class="row step-row" style="padding: 5px;">${index + 1}. ${step}</div>`;
+                });
 
                 const instructionRow = document.createElement("tr");
                 instructionRow.innerHTML = `
@@ -65,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td class="col">${images[1] ? `<img src="${appendImageUrl(images[1])}" alt="Workout Image 2" style="width:100px;">` : ""}</td>
                 `;
                 workoutTableBody.appendChild(instructionRow);
-                
             });
         } catch (error) {
             console.error("Error:", error.message);
@@ -74,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-function appendImageUrl(imageName){
+function appendImageUrl(imageName) {
     return `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${imageName}`;
 }

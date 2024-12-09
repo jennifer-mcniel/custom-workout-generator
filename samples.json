@@ -1,0 +1,99 @@
+{
+    "WorkoutPlanDescription": "This workout plan is tailored for weight loss with a focus on full-body exercises using gym equipment. It's designed for beginner fitness levels, with a 30-minute duration. The plan accommodates your sprained ankle by avoiding high-impact exercises. The plan includes a mix of free weights and body weight exercises to keep your workouts interesting and challenging.",
+    "WorkoutJson": [
+        {
+            "name": "Seated Row",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a seated row machine at the gym.",
+                "Sit down and adjust the machine to fit your body.",
+                "Grasp the bar with both hands and pull it towards your chest.",
+                "Release the bar and repeat for the desired number of reps."
+            ],
+            "images": [
+                "Seated_Row/0.jpg",
+                "Seated_Row/1.jpg"
+            ]
+        },
+        {
+            "name": "Lat Pulldown",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a lat pulldown machine at the gym.",
+                "Sit down and adjust the machine to fit your body.",
+                "Grasp the bar with a shoulder-width overhand grip.",
+                "Pull the bar down towards your chest, squeezing your lats at the top.",
+                "Release the bar and repeat for the desired number of reps."
+            ],
+            "images": [
+                "Lat_Pulldown/0.jpg",
+                "Lat_Pulldown/1.jpg"
+            ]
+        },
+        {
+            "name": "Bicep Curl",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a dumbbell or barbell at the gym.",
+                "Stand with your feet shoulder-width apart.",
+                "Grasp the weight with your palms facing forward.",
+                " Curl the weight up towards your shoulders.",
+                "Release the weight and repeat for the desired number of reps."
+            ],
+            "images": [
+                "Bicep_Curl/0.jpg",
+                "Bicep_Curl/1.jpg"
+            ]
+        },
+        {
+            "name": "Tricep Dip",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a tricep dip machine or a bench at the gym.",
+                "Sit down and adjust the machine to fit your body.",
+                "Lower your body down by bending your elbows until your arms are bent at a 90-degree angle.",
+                "Straighten your arms to return to the starting position.",
+                "Repeat for the desired number of reps."
+            ],
+            "images": [
+                "Tricep_Dip/0.jpg",
+                "Tricep_Dip/1.jpg"
+            ]
+        },
+        {
+            "name": "Leg Press",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a leg press machine at the gym.",
+                "Sit down and adjust the machine to fit your body.",
+                "Push the platform away from you with your feet.",
+                "Release the platform and repeat for the desired number of reps."
+            ],
+            "images": [
+                "Leg_Press/0.jpg",
+                "Leg_Press/1.jpg"
+            ]
+        },
+        {
+            "name": "Calf Raise",
+            "sets": 3,
+            "reps": 12,
+            "instructions": [
+                "Choose a calf raise machine or a step at the gym.",
+                "Stand on the machine or step with your heels hanging off the edge.",
+                "Raise up onto your tiptoes.",
+                "Lower back down to the starting position.",
+                "Repeat for the desired number of reps."
+            ],
+            "images": [
+                "Calf_Raise/0.jpg",
+                "Calf_Raise/1.jpg"
+            ]
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from markupsafe import escape
 from controller import generate_workout
 
@@ -8,9 +8,21 @@ app = Flask(__name__)
 def index():
     return render_template('home.html')
 
-@app.route('/api/generate-workout', methods=['POST'])
+@app.post('/api/generate-workout')
 def workout_controller():
-    return generate_workout(request)
+    try:
+        # Extract JSON data from the request
+        user_input = request.get_json()
+
+        if not user_input:
+            return jsonify({"error": "Invalid input. Please provide a valid JSON payload."}), 400
+
+        # Pass the extracted data to the generate_workout function
+        response = generate_workout(user_input)
+
+        return jsonify(response), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/success/<name>')
 def success(name):
