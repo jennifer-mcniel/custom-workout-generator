@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Parse the API response
             const data = await response.json();
             
-            // console.log("API Response:", data);
+            console.log("API Response:", data);
 
             if (!data.WorkoutPlanDescription || !data.WorkoutJson) {
                 console.error("Invalid API response:", data);

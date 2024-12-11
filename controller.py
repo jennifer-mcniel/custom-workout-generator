@@ -1,4 +1,4 @@
-import workoutsDB
+from workoutsDB import retrieve_exercises
 from groqService import generate_response, create_message
 import json
 
@@ -41,14 +41,31 @@ def generate_workout(user_input):
             ]
         }
     
+    context = getDBExercisesContext()
+
     prompt = f"""
-    Create a workout plan for me with the following preferences: {user_input}. 
-    Return the results as valid JSON which includes a few sentance description of the plan 
-    describing the workout and why it fits my preferences and a list of Exercise JSON objects 
-    that fit the my preferences. Include no text before or after the JSON object. Here is an 
-    example of what the JSON object should look like: 
+    You are an personal training assistant. Create a workout plan for me with the following preferences: 
+    
+    {user_input}
+
+    Using the following exercises:
+
+    {context}
+
+    Your response should be in valid JSON fotmat and include 2 keys/ parts. The first is a few 
+    sentance description of the plan descripbing the workout and why it fits my preferences. The 
+    second part should be a list of exercise JSON objects that match my preferences. Include no
+    other text before or after the JSON objects. Here is an example of what your response should 
+    look like please ensure your response matches the pattern and order of elements in the example:
+
     {sample_response}
-    """
+    """  
+    # Return the results as valid JSON which includes a few sentance description of the plan 
+    # describing the workout and why it fits my preferences and a list of Exercise JSON objects 
+    # that fit the my preferences. Include no text before or after the JSON object. Here is an 
+    # example of what the JSON object should look like: 
+    # {sample_response}
+    # """
     message = create_message(prompt)
 
     try:
@@ -58,7 +75,27 @@ def generate_workout(user_input):
     except Exception as e:
         return {"error": f"Failed to generate workout: {e}"}
     
+    # format LLM response to proper JSON format
     json_object = json.loads(response)
 
-
     return json_object
+
+# Helper function to get database info
+def getDBExercisesContext():
+    try:
+        exercises, column_names = retrieve_exercises()
+
+        if not exercises:
+            raise ValueError("No Exercises Found.")
+    except Exception as e:
+        return {"error": f"Retrieving Database Exercises Failed: {e}"}
+
+    context = "Here are the exercises to use when creating the workout plan:\n"
+    for exercise in exercises:
+        exercise_details = []
+        for i in range(len(column_names)):
+            exercise_details.append(f"{column_names[i]}: {exercise[i]}")
+
+        context += ", ".join(exercise_details) + "\n"
+         
+    return context

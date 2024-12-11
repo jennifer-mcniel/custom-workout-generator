@@ -1,26 +1,29 @@
 import sqlite3
 import json
 
+
 conn = sqlite3.connect(":memory:")
 cursor = conn.cursor()
 
 # Create tables
-cursor.execute("""
-CREATE TABLE exercises (
-    id TEXT PRIMARY KEY,
-    name TEXT,
-    force TEXT,
-    level TEXT,
-    mechanic TEXT,
-    equipment TEXT,
-    primaryMuscles TEXT,
-    secondaryMuscles TEXT,
-    instructions TEXT,
-    category TEXT,
-    images TEXT
-)
-""")
+def create_table():
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS exercises (
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        force TEXT,
+        level TEXT,
+        mechanic TEXT,
+        equipment TEXT,
+        primaryMuscles TEXT,
+        secondaryMuscles TEXT,
+        instructions TEXT,
+        category TEXT,
+        images TEXT
+    )
+    """)
 
+create_table()
 
 
 # Helper method to convert objects into insert statement
@@ -72,7 +75,7 @@ def read_and_process_json(file_path):
             # print(json_obj)
         conn.commit()
 
-read_and_process_json('./exercise10.json')
+# read_and_process_json('./exercise10.json')
 
 # Query the database
 def retrieve_exercises():
@@ -82,4 +85,4 @@ def retrieve_exercises():
     results = cursor.fetchall()
     return results, [description[0] for description in cursor.description]
 
-# print(retrieve_exercises())
+print(retrieve_exercises())

@@ -1,8 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 from markupsafe import escape
 from controller import generate_workout
+from workoutsDB import create_table, json_to_insert, read_and_process_json
 
 app = Flask(__name__)
+
+# set up database
+create_table()
+read_and_process_json('./exercise10.json')
 
 @app.route('/')
 def index():
