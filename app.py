@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # set up database
 create_table()
-read_and_process_json('./exercise10.json')
+read_and_process_json('./exercise10.json') # ./exercises.json has 900 records, ./exercise10.json has 10 records
 
 @app.route('/')
 def index():

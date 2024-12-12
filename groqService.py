@@ -20,7 +20,7 @@ def getTestLLMMessage():
 
     return chat_completion.choices[0].message.content
 
-def generate_response(messages, model="llama-3.1-8b-instant", max_tokens=1500, temperature=0.7):
+def generate_response(messages, model="llama-3.1-8b-instant", max_tokens=6000, temperature=0.9):
     chat_completion = client.chat.completions.create(
         messages=messages,
         model=model,

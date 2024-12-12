@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // console.log(JSON.stringify(formObject));
 
             if (!response.ok) {
-                throw new Error("Failed to fetch workout data");
+                throw new Error("Failed to fetch workout data" + response.status);
             }
 
             // Parse the API response

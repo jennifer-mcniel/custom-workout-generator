@@ -44,19 +44,22 @@ def generate_workout(user_input):
     context = getDBExercisesContext()
 
     prompt = f"""
-    You are an personal training assistant. Create a workout plan for me with the following preferences: 
+    You are a personal training assistant. Create a workout plan for me by making selections from  
+    the following exercises:
+     
+     {context}
+
+    that matches with the following preferences: 
     
     {user_input}
 
-    Using the following exercises:
-
-    {context}
-
-    Your response should be in valid JSON fotmat and include 2 keys/ parts. The first is a few 
+    Your response should be in valid JSON format and include 2 keys/ parts. The first is a few 
     sentance description of the plan descripbing the workout and why it fits my preferences. The 
-    second part should be a list of exercise JSON objects that match my preferences. Include no
-    other text before or after the JSON objects. Here is an example of what your response should 
-    look like please ensure your response matches the pattern and order of elements in the example:
+    second part should be a list of exercise JSON objects that match my preferences and are exact 
+    copies of one of the exercises provided above. Ensure the response contains sets, reps, instructions 
+    as an array of strings, name, and images as an array. Include no other text before or after the JSON objects. Here is an example of what your response 
+    should look like please ensure your response matches the pattern and order of elements in the 
+    example:
 
     {sample_response}
     """  
@@ -66,6 +69,7 @@ def generate_workout(user_input):
     # example of what the JSON object should look like: 
     # {sample_response}
     # """
+
     message = create_message(prompt)
 
     try:

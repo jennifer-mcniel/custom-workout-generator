@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 
-conn = sqlite3.connect(":memory:")
+conn = sqlite3.connect(':memory:', check_same_thread=False)
 cursor = conn.cursor()
 
 # Create tables
