@@ -102,11 +102,13 @@ Success (200):
 Error (500): Server error message
 
 Analysis
+
 The workout generator app dynamically generates personalized workouts for users based on preferences. It is much more flexible and useful than a database alone limited to simple filters or searches. If a user doesn't spell something correctly or is unsure about requirements the app can adjust and accomodate them. Users interact with a clean form to input their preferences and recieve their results in an organized table with all of the essential information they need to complete their workout. 
 
 This app relies heavily on external endpoints for sources. If the free exersize DB stops hosting image files or Groq's api endpoint becomes inconsistent the app's functionality may suffer.  The RAG implementation to supply the entire exercise database for the query uses more than the allowed token limits so the app is only set up to use a portion of the available exercise dataset. It also limits the number of calls to the Groq service per minute. So there could be errors if a user requests another workout too quickly. 
 
 Potential Improvements
+
 The usefullness of the app would improve greatly if token limits were increased by subscribing to a paid service with higher token limits. I also would like to implement a user login featre that would save user workouts to their profile. This could be expanded on even further to provide fitness tracking features like past and current weights for exercises and history of completed workouts. I would have also liked to have add more UI responsiveness to make it more mobile friendly. 
 
 
