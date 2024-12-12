@@ -3,7 +3,7 @@ from groqService import generate_response, create_message
 import json
 
 
-
+# interacts with the groq layer, app layer and DB layer to assemble the prompt for the llm
 def generate_workout(user_input):
     sample_response = { 
         
@@ -57,19 +57,12 @@ def generate_workout(user_input):
     sentance description of the plan descripbing the workout and why it fits my preferences. The 
     second part should be a list of exercise JSON objects that match my preferences and are exact 
     copies of one of the exercises provided above. Ensure the response contains sets, reps, instructions 
-    as an array of strings, name, and images as an array. Include no other text before or after the JSON objects. Here is an example of what your response 
-    should look like please ensure your response matches the pattern and order of elements in the 
-    example:
+    as an array of strings, name, and images as an array. Include no other text before or after the JSON 
+    objects. Here is an example of what your response should look like please ensure your response 
+    matches the pattern and order of elements in the example:
 
     {sample_response}
     """  
-    # Return the results as valid JSON which includes a few sentance description of the plan 
-    # describing the workout and why it fits my preferences and a list of Exercise JSON objects 
-    # that fit the my preferences. Include no text before or after the JSON object. Here is an 
-    # example of what the JSON object should look like: 
-    # {sample_response}
-    # """
-
     message = create_message(prompt)
 
     try:

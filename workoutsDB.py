@@ -85,4 +85,4 @@ def retrieve_exercises():
     results = cursor.fetchall()
     return results, [description[0] for description in cursor.description]
 
-print(retrieve_exercises())
+# print(retrieve_exercises())
